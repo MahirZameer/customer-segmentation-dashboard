@@ -4,6 +4,7 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 
+from pathlib import Path
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 
@@ -144,8 +145,9 @@ st.markdown(
 # -----------------------------
 @st.cache_data
 def load_default_data():
-    return pd.read_csv("data/Mall.csv")
-
+    current_dir = Path(__file__).parent
+    data_path = current_dir / "data" / "Mall.csv"
+    return pd.read_csv(data_path)
 
 def get_numeric_columns(dataframe):
     return dataframe.select_dtypes(include=np.number).columns.tolist()
